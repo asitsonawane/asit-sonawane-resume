@@ -172,7 +172,10 @@ td.edu{
   border: 1px solid rgba(0,221,0,1);
 }
 
-
+canvas {
+  display: block;
+  transition: opacity 1s ease-out;
+}
 
 table {
   border-collapse: collapse;
