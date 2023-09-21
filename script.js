@@ -1,4 +1,18 @@
+function updateTime() {
+  const currentTimeElement = document.getElementById('currentTime');
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  const currentTimeString = `${hours}:${minutes}:${seconds}`;
+  currentTimeElement.textContent = currentTimeString;
+}
 
+// Update the time every second (1000 milliseconds)
+setInterval(updateTime, 1000);
+
+// Initial update
+updateTime();
 
 const commandInput = document.getElementById('command-input');
 const outputDiv = document.getElementById('output');
@@ -75,6 +89,84 @@ function executeCommand(command) {
 
   switch (commandName) {
 
+    case 'top':
+      const topText = `
+        <p>
+          top - up 22 years, 1 user, load average: 1.13, 0.44, 0.28<br>
+          Tasks: 20 total, 20 running, 0 sleeping, 0 stopped, © zombie<br>
+          %Cpu(s) : 14.4 Us, 1.0 sy, 0.0 ni, 84.6 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st<br>
+          MiB Mem : 7974.8 total, 5649.8 free, 1306.6 used, 1018.4 buff/cache<br>
+          MiB Swap: 4095.5 total, 4095.5 free, 0.0 used. 6397.9 avail Mem
+        </p>
+        <br>
+        <table>
+          <tr>
+              <th>PID</th>
+              <th>LANGUAGES & RUNTIMES</th>
+              <th>CLOUD</th>
+              <th>INFRASTRUCTURE TOOLS</th>
+              <th>DATABASES</th>
+              <th>TIME+</th>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>Python</td>
+              <td>GCP</td>
+              <td>Anisble</td>
+              <td>PostgreSQL</td>
+	            <td>0:02.30</td>
+          </tr>
+          <tr>
+              <td>2</td>
+              <td>HCL</td>
+              <td>AWS</td>
+              <td>Kubernetes</td>
+              <td>MySQL</td>
+              <td>0:01.45</td>
+          </tr>
+          <tr>
+              <td>3</td>
+              <td>JavaScript</td>
+              <td>Azure</td>
+              <td>Docker</td>
+              <td>Redis</td>
+              <td>0:02.10</td>
+          </tr>
+          <tr>
+              <td>4</td>
+              <td>NodeJS</td>
+              <td>Digital Ocean</td>
+              <td>Terraform</td>
+              <td>MongoDB</td>
+              <td>0:02.25</td>
+          </tr>
+          <tr>
+              <td>5</td>
+              <td>Git</td>
+              <td></td>
+              <td>Grafana</td>
+              <td></td>
+              <td>0:01.50</td>
+          </tr>
+          <tr>
+              <td>6</td>
+              <td>Groovy</td>
+              <td></td> 
+              <td>CloudWatch</td>
+              <td></td>
+              <td>0:25.05</td>
+          </tr>
+        </table><br>
+        <italics>the level and skills are only for the GUI context and not actual rating</italics>`;
+      output.innerHTML += '<br>' + topText;
+      break;
+
+    case 'whoami':
+      const whoamiText = '<br><img src="whoami.png" alt="AsitSonawane" id="sudo" /> Asit Sonawane<br>' +
+      '<a href="https://www.linkedin.com/in/asit-sonawane/" target="_blank">LinkedIn @asit-sonawane</a>';
+      output.innerHTML += '<br>' + whoamiText;
+      break;
+
     case 'sudo':
       const sudoImage = document.createElement('img'); // Create an <img> element
       sudoImage.src = 'sudoImg.jpg'; // Set the source of the image
@@ -88,6 +180,8 @@ function executeCommand(command) {
         '- ls: List files and directories in the current directory.\n' +
         '- clear: Clear the screen.\n' +
         '- cd [directory]: Change to the specified directory.\n' +
+        "- whoami: displays the user's name"+
+        '- top: shows the processes and other details'
         '- cat [file]: Display the content of the specified file.';
       output.innerText += '\n' + helpText;
       break;

@@ -125,11 +125,38 @@ header.site {
   -ms-overflow-style: none;
 }
 
-img.sudo {
-  display: inline-block !important;
+img.sudo,#sudo {
+  display: block !important;
   width: 25% !important;
   border: 2px solid !important;
   margin: 10px !important;
+}
+
+@media (max-width: 768px) {
+  img.sudo {
+      width: 70% !important;
+  }
+}
+
+a {
+  color: rgba(0,221,0,1);
+  font-weight: thin;
+  font-style: italic;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  /* margin: 20px auto; */
+}
+th, td {
+  /* border: 1px solid black; */
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: white;
+  color: #262626;
 }
 
 .content { 
@@ -171,7 +198,7 @@ img.pip-hero {
   z-index: 2;
 }
 
-#terminal{}
+/* #terminal{} */
 
 .clear {
 	clear: both;
@@ -278,7 +305,7 @@ input::-moz-selection {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #000;
+  background-color: #262626;
 }
 /* 
 /* For Firefox */
