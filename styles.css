@@ -67,6 +67,7 @@ header.site {
   margin: 0 0 40px 0;
   text-transform: uppercase;
   align-items: center;
+  flex-direction: row;
 }
 
 .overlay {
@@ -133,9 +134,24 @@ img.sudo,#sudo {
 }
 
 @media (max-width: 768px) {
-  img.sudo,#sudo {
+  img.sudo {
       width: 70% !important;
   }
+  #sudo {
+    width: 70% !important;
+  }
+  .col{
+    padding: 0px;
+  }
+
+  #logo-v {
+    width: 100px;
+  }
+
+  header.site {
+    flex-direction: column;
+  }
+
 }
 
 a {
