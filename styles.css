@@ -164,6 +164,16 @@ a {
   font-style: italic;
 }
 
+table.edu{
+  width: fit-content;
+}
+
+td.edu{
+  border: 1px solid rgba(0,221,0,1);
+}
+
+
+
 table {
   border-collapse: collapse;
   width: 100%;

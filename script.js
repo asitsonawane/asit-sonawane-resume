@@ -14,6 +14,25 @@ setInterval(updateTime, 1000);
 // Initial update
 updateTime();
 
+// Function to set focus on the input element when the page loads
+function setFocus() {
+  var inputElement = document.getElementById("command-input");
+  inputElement.focus();
+}
+
+// Call the setFocus function when the page is fully loaded
+document.addEventListener("DOMContentLoaded", setFocus);
+
+// Add an event listener to capture clicks on the entire document
+document.addEventListener("click", function(event) {
+  var inputElement = document.getElementById("command-input");
+  // Check if the click target is not the input element itself
+  if (event.target !== inputElement) {
+    // Set focus on the input element
+    inputElement.focus();
+  }
+});
+
 const commandInput = document.getElementById('command-input');
 const outputDiv = document.getElementById('output');
 const commandPrompt = document.getElementById('command-prompt');
@@ -32,23 +51,83 @@ const filesystem = {
   },
   '/home': {
     type: 'directory',
-    content: ['file1.txt', 'file2.txt', 'projects'],
+    content: ['edu.txt', 'projects.txt', 'work', 'exp.txt'],
     parent: '/'
   },
-  '/home/file1.txt': {
-    type: 'file',
-    content: 'This is the content of file1.txt',
-    parent: '/home'
-  },
-  '/home/file2.txt': {
-    type: 'file',
-    content: 'This is the content of file2.txt',
-    parent: '/home'
-  },
-  '/home/projects': {
+  '/home/work': {
     type: 'directory',
-    content: [],
+    content: ['exp.txt'],
     parent: '/home'
+  },
+  '/home/edu.txt': {
+    type: 'file',
+    content: `
+    <table class='edu'>
+    <tr class='edu'>
+        <td class='edu'>Trinity Academy of Engineering, Savitribai Phule Pune University</td>
+        <td class='edu'>August 2019 – June 2023</td>
+    </tr>
+    <tr class='edu'>
+        <td class='edu'>Bachelor of Technology in Computer Science and Engineering Pune, India</td>
+        <td class='edu'>Pune, India</td>
+    </tr>
+  </table>`,
+    parent: '/home'
+  },
+  '/home/projects.txt': {
+    type: 'file',
+    content: `<br> =======================================
+
+    <p><b>CMS CI/CD with Docker Compose and GitHub Actions</b></p>
+    <p>Developed a guide to walk users through the process of setting up complete LEMP stack development environment for WordPress using Docker Compose, and then deploying the website to a hosting platform using GitHub Actions.This allows for easy development and deployment without worrying about complex configuration.</p>
+    <a href="https://github.com/asitsonawane/wordpress-docker-compose/tree/main" target="_blank">https://github.com/asitsonawane/wordpress-docker-compose/tree/main</a>
+
+    <br> =======================================
+
+    <p><b>Dynamic Load Balancer using Weighted Round Robin Algo with Automatic Scaling</b></p>
+    <p>Designed and implemented Automatic Scaling Load Balancer system, employing round-robin and weighted round-robin algorithms for efficient request distribution. Demonstrated adeptness in multithreading and race condition handling, ensuring seamless parallel processing of requests and accurate statistics collection.</p>
+    <a href="https://github.com/asitsonawane/Building-an-Automatic-Scaling-Load-Balancer-with-Go" target="_blank">https://github.com/asitsonawane/Building-an-Automatic-Scaling-Load-Balancer-with-Go</a>
+    
+    <br> =======================================
+    `,
+    parent: '/home'
+  },
+  '/home/work/exp.txt': {
+    type: 'file',
+    content: `
+    <br> =======================================
+    
+    <p><b>Assetcues Private Limited | DevOps Engineer</b></p>
+    <p>February 2023 - Present</p>
+    <ul>
+      <li><p>CI/CD Pipeline Transformation: By designing and implementing Jenkins CI/CD pipelines, I reduced deployment cycle times bya remarkable 91.11% and enhanced cross-team collaboration along with DevSecOps practices using OWASP and Sonarqube which resulted in improvement of pipeline as well as product security by 80%.</p></li>
+      <li><p>Handled critical multi-tenant SaaS infrastructure across production stacks which is responsible for running 300,000 devices forFortune 500 clients like Grasim and Mitsubishi. Built with Kubernetes, Azure App Service, Azure CDN, PostgreSQL, and Redisspread across AWS and Azure.</p></li>
+      <li><p>Implemented CI/CD across the organization using Jenkins and re-modeled 4+ projects to use containerization which laid the groundwork for architecture standardization across internal and client projects</p></li>
+    </ul>
+
+    <br> =======================================
+
+    <p><b>Prospera Web Solutions | Web Developer & Cloud Engineer</b></p>
+    <p>November 2020 - Present</p>
+    <ul>
+      <li><p>Led multi-cloud infrastructure management (AWS, Azure, GCP) with a focus on scalability and security, achieving a 20% cost reduction through optimization.</p></li>
+      <li><p>Automated infrastructure deployment using Terraform and CloudFormation, reducing deployment times by 40%, and orchestrated containerized apps with Kubernetes for seamless scaling.</p></li>
+      <li><p>Implemented robust CI/CD pipelines with Jenkins, improved monitoring with CloudWatch, and enabled enterprise login across customer-facing products through Single-Sign-On with Key cloak. Developed and deployed APIs using ExpressJS, MongoDB,and AWS ECS, while staying updated with the latest cloud tech trends and fostering knowledge sharing.</p></li>
+    </ul>
+
+    <br> =======================================
+
+    <p><b>ImpulseChitra, Bangalore | Web Developer</b></p>
+    <p>November 2021 - January 2022</p>
+    <ul>
+      <li><p>Developed responsive web applications with HTML5, CSS3, and JavaScript, utilizing frameworks like React and Angular for exceptional user interfaces. Collaborated closely with design teams to ensure a seamless user experience.</p></li>
+      <li><p>Optimized front-end performance, achieving a remarkable 30% reduction in page load times. Integrated RESTful APIs and third-party services to enhance website functionality, ensuring efficient code management with Git for effective team collaboration and version control.</p></li>
+      <li><p>Maintained high code quality standards through regular code reviews and debugging. Stayed up-to-date with industry trends and emerging web technologies, contributing to continuous improvement efforts in web development practices.</p></li>
+    </ul>
+
+    <br> =======================================
+    `,
+    parent: '/home/work'
   }
 };
 
@@ -106,14 +185,16 @@ function executeCommand(command) {
               <th>CLOUD</th>
               <th>INFRASTRUCTURE TOOLS</th>
               <th>DATABASES</th>
+              <th>OTHER TOOLS</th>
               <th>TIME+</th>
           </tr>
           <tr>
               <td>1</td>
               <td>Python</td>
               <td>GCP</td>
-              <td>Anisble</td>
+              <td>Ansible</td>
               <td>PostgreSQL</td>
+              <td>Jenkins</td>
 	            <td>0:02.30</td>
           </tr>
           <tr>
@@ -122,6 +203,7 @@ function executeCommand(command) {
               <td>AWS</td>
               <td>Kubernetes</td>
               <td>MySQL</td>
+              <td>GitHub Actions</td>
               <td>0:01.45</td>
           </tr>
           <tr>
@@ -130,6 +212,7 @@ function executeCommand(command) {
               <td>Azure</td>
               <td>Docker</td>
               <td>Redis</td>
+              <td>Nginx</td>
               <td>0:02.10</td>
           </tr>
           <tr>
@@ -138,6 +221,7 @@ function executeCommand(command) {
               <td>Digital Ocean</td>
               <td>Terraform</td>
               <td>MongoDB</td>
+              <td>Apache</td>
               <td>0:02.25</td>
           </tr>
           <tr>
@@ -146,6 +230,7 @@ function executeCommand(command) {
               <td></td>
               <td>Grafana</td>
               <td></td>
+              <td></td>
               <td>0:01.50</td>
           </tr>
           <tr>
@@ -153,6 +238,7 @@ function executeCommand(command) {
               <td>Groovy</td>
               <td></td> 
               <td>CloudWatch</td>
+              <td></td>
               <td></td>
               <td>0:25.05</td>
           </tr>
@@ -218,7 +304,7 @@ function executeCommand(command) {
         output.innerText += '\nMissing target file.';
       } else if (targetFile in filesystem && filesystem[targetFile].type === 'file') {
         const fileContent = filesystem[targetFile].content;
-        output.innerText += '\n' + fileContent;
+        output.innerHTML += '\n' + fileContent;
       } else {
         output.innerText += '\nFile not found: ' + commandParts[1];
       }
