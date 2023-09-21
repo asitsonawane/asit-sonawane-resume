@@ -63,8 +63,10 @@ html, body {
 }
 
 header.site {
-	margin: 0 0 40px 0;
-	text-transform: uppercase;
+	display: flex;
+  margin: 0 0 40px 0;
+  text-transform: uppercase;
+  align-items: center;
 }
 
 .overlay {
@@ -105,7 +107,7 @@ header.site {
 
 .col {
   float: left;
-  /* padding: 0 20px; */
+  padding: 0 20px;
 }
 
 .app{
@@ -124,10 +126,10 @@ header.site {
 }
 
 img.sudo {
-  	display: flex;
-	width: 35% !important;
-	border: 2px solid !important;
-	margin: 10px !important;
+  display: inline-block !important;
+  width: 25% !important;
+  border: 2px solid !important;
+  margin: 10px !important;
 }
 
 .content { 
@@ -278,14 +280,14 @@ input::-moz-selection {
 ::-webkit-scrollbar-track {
   background-color: #000;
 }
-
+/* 
 /* For Firefox */
 /* You may need to enable custom scrollbars in about:config for Firefox */
 /* Set 'layout.css.scrollbar-color.enabled' to 'true' */
-scrollbar-color: #05B406 #000;
+/* scrollbar-color: #05B406 #000; */
 
 /* For other browsers (fallback) */
 /* This will style the scrollbar but won't support custom colors */
-scrollbar-width: thin;
+/* scrollbar-width: thin;
 scrollbar-color: #05B406 #000;
-
+ */
