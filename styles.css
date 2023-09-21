@@ -133,7 +133,7 @@ img.sudo,#sudo {
 }
 
 @media (max-width: 768px) {
-  img.sudo {
+  img.sudo,#sudo {
       width: 70% !important;
   }
 }
