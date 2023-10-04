@@ -66,7 +66,7 @@ header.site {
 	display: flex;
   margin: 0 0 40px 0;
   text-transform: uppercase;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
 }
 
@@ -113,6 +113,7 @@ header.site {
 
 .app{
   padding: 20px;
+  display: none;
 }
 
 .col.two { width: auto; }
@@ -133,30 +134,7 @@ img.sudo,#sudo {
   margin: 10px !important;
 }
 
-@media (max-width: 768px) {
-  img.sudo {
-      width: 70% !important;
-  }
-  #sudo {
-    width: 70% !important;
-  }
-  .col{
-    padding: 0px;
-  }
 
-  #logo-v {
-    width: 100px;
-  }
-
-  header.site {
-    flex-direction: column;
-  }
-
-  * {
-    font-size: 16px;
-  }
-
-}
 
 a {
   color: rgba(0,221,0,1);
@@ -340,6 +318,49 @@ input::-moz-selection {
 ::-webkit-scrollbar-track {
   background-color: #262626;
 }
+
+.welcome{
+  display: block;
+}
+
+@media (max-width: 768px) {
+  img.sudo {
+      width: 70% !important;
+  }
+  #sudo {
+    width: 70% !important;
+  }
+  .col{
+    padding: 0px;
+  }
+
+  #logo-v {
+    width: 100px;
+  }
+
+  header.site {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .welcome{
+    display: none;
+  }
+
+  * {
+    font-size: 16px;
+  }
+
+  .overlay:before {
+    background-size: 100% 1px, 6px 100%;
+  }
+    
+  .overlay:after {
+    background: rgba(16, 16, 16, 0.2);
+  }
+
+}
+
 /* 
 /* For Firefox */
 /* You may need to enable custom scrollbars in about:config for Firefox */

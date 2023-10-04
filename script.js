@@ -1,52 +1,71 @@
-// Initialising the canvas
-var canvas = document.querySelector('canvas'),
-ctx = canvas.getContext('2d');
-
-// Setting the width and height of the canvas
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-// Setting up the letters
-var letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ';
-letters = letters.split('');
-
-// Setting up the columns
-var fontSize = 10,
-columns = canvas.width / fontSize;
-
-// Setting up the drops
-var drops = [];
-for (var i = 0; i < columns; i++) {
-drops[i] = 1;
-}
-
-// Setting up the draw function
-function draw() {
-ctx.fillStyle = 'rgba(0, 0, 0, .1)';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-for (var i = 0; i < drops.length; i++) {
-  var text = letters[Math.floor(Math.random() * letters.length)];
-  ctx.fillStyle = '#0f0';
-  ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-  drops[i]++;
-  if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
-    drops[i] = 0;
-  }
-}
-}
-
 // Apply overflow: hidden to the body
 document.body.style.overflow = 'hidden';
+
+// JavaScript to show the .app element after 5 seconds
+setTimeout(function () {
+  var appElement = document.querySelector('.app');
+  if (appElement) {
+    appElement.style.display = 'block';
+  }
+}, 5000);
 
 // Schedule canvas removal after 3 seconds
 setTimeout(function () {
   document.body.style.overflow = 'auto'; // Set overflow back to auto to restore scrolling
   document.body.removeChild(canvas);
-}, 10000);
+}, 5000);
 
 // Loop the animation
-setInterval(draw, 33);
+// setInterval(draw, 33);
 
+var canvas = document.getElementById('matrixCanvas');
+var ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+var letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ';
+letters = letters.split('');
+
+var fontSize = 10;
+var columns = Math.floor(canvas.width / fontSize);
+
+var drops = [];
+for (var i = 0; i < columns; i++) {
+  drops[i] = Math.floor(Math.random() * canvas.height);
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#0f0';
+  ctx.font = fontSize + 'px monospace';
+
+  for (var i = 0; i < drops.length; i++) {
+    var text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+
+// Resize canvas when the window is resized
+window.addEventListener('resize', function() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  columns = Math.floor(canvas.width / fontSize);
+  drops = [];
+  for (var i = 0; i < columns; i++) {
+    drops[i] = Math.floor(Math.random() * canvas.height);
+  }
+});
 
 
 
@@ -128,7 +147,7 @@ const filesystem = {
   },
   '/home/projects.txt': {
     type: 'file',
-    content: `<br> =======================================
+    content: `
 
     <p><b>CMS CI/CD with Docker Compose and GitHub Actions</b></p>
     <p>Developed a guide to walk users through the process of setting up complete LEMP stack development environment for WordPress using Docker Compose, and then deploying the website to a hosting platform using GitHub Actions.This allows for easy development and deployment without worrying about complex configuration.</p>
@@ -152,19 +171,23 @@ const filesystem = {
     <p><b>Assetcues Private Limited | DevOps Engineer</b></p>
     <p>February 2023 - Present</p>
     <ul>
-      <li><p>CI/CD Pipeline Transformation: By designing and implementing Jenkins CI/CD pipelines, I reduced deployment cycle times bya remarkable 91.11% and enhanced cross-team collaboration along with DevSecOps practices using OWASP and Sonarqube which resulted in improvement of pipeline as well as product security by 80%.</p></li>
-      <li><p>Handled critical multi-tenant SaaS infrastructure across production stacks which is responsible for running 300,000 devices forFortune 500 clients like Grasim and Mitsubishi. Built with Kubernetes, Azure App Service, Azure CDN, PostgreSQL, and Redisspread across AWS and Azure.</p></li>
-      <li><p>Implemented CI/CD across the organization using Jenkins and re-modeled 4+ projects to use containerization which laid the groundwork for architecture standardization across internal and client projects</p></li>
+      <li><p>Supported the infrastructure of a $10M company, including AWS EC2, Azure VMs, Postgres & MySQL databases, Nginx Ingress Load Balancers, S3 buckets, CDN distribution and much more.</p></li>
+
+      <li><pReduced deployment time by 99.74% (from 4 days to 15 minutes) with automation tools, while improving cross-team collaboration and product security by 80% through DevSecOps practices using OWASP and Sonarqube.</p></li>
+
+      <li><p>Handled critical multi-tenant SaaS infrastructure across production stacks which is responsible for running 300,000 devices for Fortune 500 clients like Grasim and Mitsubishi. Built with Kubernetes, Azure Services, PostgreSQL, S3, and Redis.</p></li>
+
+      <li><p>Automated deployment of 7 new servers using Ansible playbooks to reduce manual effort by 92%.</p></li>
     </ul>
 
     <br> =======================================
 
-    <p><b>Prospera Web Solutions | Web Developer & Cloud Engineer</b></p>
-    <p>November 2020 - Present</p>
+    <p><b>Infodeal Technologies Pvt Ltd | Cloud Engineer</b></p>
+    <p>January 2022 - February 2023</p>
     <ul>
       <li><p>Led multi-cloud infrastructure management (AWS, Azure, GCP) with a focus on scalability and security, achieving a 20% cost reduction through optimization.</p></li>
       <li><p>Automated infrastructure deployment using Terraform and CloudFormation, reducing deployment times by 40%, and orchestrated containerized apps with Kubernetes for seamless scaling.</p></li>
-      <li><p>Implemented robust CI/CD pipelines with Jenkins, improved monitoring with CloudWatch, and enabled enterprise login across customer-facing products through Single-Sign-On with Key cloak. Developed and deployed APIs using ExpressJS, MongoDB,and AWS ECS, while staying updated with the latest cloud tech trends and fostering knowledge sharing.</p></li>
+      <li><p>Reduced average server downtime by 67% through improved monitoring processes and 24/7 maintenance checks.</p></li>
     </ul>
 
     <br> =======================================
@@ -172,9 +195,8 @@ const filesystem = {
     <p><b>ImpulseChitra, Bangalore | Web Developer</b></p>
     <p>November 2021 - January 2022</p>
     <ul>
-      <li><p>Developed responsive web applications with HTML5, CSS3, and JavaScript, utilizing frameworks like React and Angular for exceptional user interfaces. Collaborated closely with design teams to ensure a seamless user experience.</p></li>
+      <li><p>Developed responsive web applications with JavaScript, utilizing frameworks like React and Angular for exceptional user interfaces. Collaborated closely with design teams to ensure a seamless user experience.</p></li>
       <li><p>Optimized front-end performance, achieving a remarkable 30% reduction in page load times. Integrated RESTful APIs and third-party services to enhance website functionality, ensuring efficient code management with Git for effective team collaboration and version control.</p></li>
-      <li><p>Maintained high code quality standards through regular code reviews and debugging. Stayed up-to-date with industry trends and emerging web technologies, contributing to continuous improvement efforts in web development practices.</p></li>
     </ul>
 
     <br> =======================================
@@ -318,9 +340,10 @@ function executeCommand(command) {
         '- ls: List files and directories in the current directory.\n' +
         '- clear: Clear the screen.\n' +
         '- cd [directory]: Change to the specified directory.\n' +
-        "- whoami: displays the user's name"+
-        '- top: shows the processes and other details'
-        '- cat [file]: Display the content of the specified file.';
+        "- whoami: displays the user's name. \n"+
+        '- top: shows the processes and other details. \n' +
+        '- cat [file]: Display the content of the specified file. \n'+
+        '- sudo: maybe?';
       output.innerText += '\n' + helpText;
       break;
 
@@ -371,7 +394,7 @@ function executeCommand(command) {
       break;
 
     default:
-      output.innerText += `\n${command}: command not found. \n Type "help" for available commands.`;
+      output.innerText += `\n${command}: command not found. \n \n Type "help" for available commands.\n \n The text is case sensitive, please review your command.`;
       break;
   }
 
